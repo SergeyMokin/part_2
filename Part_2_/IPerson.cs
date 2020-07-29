@@ -9,7 +9,6 @@ namespace Part_2
         string LastName { get; set; }
         string Email { get; set; }
         Gender Gender { get; set; }
-
         string GetFullName();
     }
 }
