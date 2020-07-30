@@ -38,15 +38,35 @@ namespace Part_2
 
         public int CompareTo(IPerson other)
         {
-            return this.FirstName.CompareTo(other.FirstName);
+            if (other == null)
+                return 1;
+            else
+            {
+                int compResult = 0;
+                compResult = Id.CompareTo(other.Id);
+                if (compResult != 0) 
+                    return compResult;
+                compResult = string.Compare(this.FirstName, other.FirstName);
+                if (compResult != 0) 
+                    return compResult;
+                compResult = string.Compare(this.LastName, other.LastName);
+                if (compResult != 0) 
+                    return compResult;
+                compResult = string.Compare(this.Email, other.Email);
+                if (compResult != 0) 
+                    return compResult;
+                compResult = Gender.CompareTo(other.Gender);
+                return compResult;
+            }
         }
 
         public int CompareTo(object obj)
         {
-            if (obj is Person p)
-                return this.FirstName.CompareTo(p.FirstName);
-            else
-                throw new Exception("compare is Failed");
+            if (obj == null)
+                return 1;
+            else 
+                return CompareTo(obj as IPerson);
+                
         }
 
         public override bool Equals(object obj)

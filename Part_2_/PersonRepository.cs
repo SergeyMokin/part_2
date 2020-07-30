@@ -22,7 +22,7 @@ namespace Part_2
                 int counter = 0;
                 foreach (IPerson p in _persons)
                 {
-                    if (p.Gender == 0)
+                    if (p.Gender == Gender.M)
                         ++counter;
                 }
                 return counter;
@@ -36,7 +36,7 @@ namespace Part_2
                 int counter = 0;
                 foreach (IPerson p in _persons)
                 {
-                    if ((int)p.Gender == 1)
+                    if (p.Gender == Gender.W)
                         counter++;
                 }
                 return counter;
@@ -86,8 +86,8 @@ namespace Part_2
         public IPerson Add(IPerson person)
         {
             // TODO: add new Person
-            if (_persons[_persons.Length - 1] == null)
-                 _persons[_persons.Length - 1] = person;
+            Array.Resize(ref _persons, _persons.Length + 1);
+            _persons[_persons.Length - 1] = person;
             return person;
         }
 

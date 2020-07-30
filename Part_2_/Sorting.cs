@@ -70,12 +70,15 @@ namespace Part_2
         {
             // NOTE: do not use LINQ
             // TODO: implement here
-            HashSet<T> hs = new HashSet<T>();
-            foreach (T col  in collection)
-                if (!hs.Contains(col))
-                    hs.Add(col);
-               T[] uniqueArr =new T[hs.Count];
-            hs.CopyTo(uniqueArr);
+            T[] uniqueArr = new T[0];
+            foreach (T item in collection)
+            {
+                if (Array.IndexOf(uniqueArr,item)==-1)
+                {
+                    Array.Resize(ref uniqueArr, uniqueArr.Length + 1);
+                    uniqueArr.SetValue(item, uniqueArr.Length - 1);
+                }
+            }
             return uniqueArr;
         }
     }
