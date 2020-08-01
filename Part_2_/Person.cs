@@ -10,19 +10,19 @@ namespace Part_2
     // TODO: override Equals and  GetHashCode
     public class Person : IPerson
     {
-        private string email;
+        private string _email;
         public long Id { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public string Email
 
         {
-            get { return email; }
+            get { return _email; }
             set
             {
                 if (string.IsNullOrEmpty(value) || !value.Contains("@"))
                     throw new ArgumentException();
-                email = value;
+                _email = value;
             }
         }
         public Gender Gender { get; set; }

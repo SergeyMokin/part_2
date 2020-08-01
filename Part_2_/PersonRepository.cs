@@ -1,5 +1,5 @@
 ﻿using System;
-using System.Text.RegularExpressions;
+
 
 namespace Part_2
 {
@@ -86,8 +86,12 @@ namespace Part_2
         public IPerson Add(IPerson person)
         {
             // TODO: add new Person
-            Array.Resize(ref _persons, _persons.Length + 1);
-            _persons[_persons.Length - 1] = person;
+            foreach (IPerson pers in _persons)
+            {
+                if(pers.Equals(person)==false)
+                Array.Resize(ref _persons, _persons.Length + 1);
+                _persons[_persons.Length - 1] = person;
+            }
             return person;
         }
 
@@ -102,13 +106,13 @@ namespace Part_2
         public IPerson Delete(long id)
         {
             // TODO: delete person
-            for (long i = 0; i < _persons.Length; ++i)
-            {
-                if (_persons[i].Id == id)
-                    
-                return _persons[i];
-            }
-            return _persons[id-1] = null; 
+            IPerson[] afterDel = new IPerson[_persons.Length - 1];
+            int indexPersToDel = Array.IndexOf(_persons, Get(id));
+            IPerson persToDel = _persons[indexPersToDel];
+            Array.Copy(_persons, 0, afterDel, 0, indexPersToDel);
+            Array.Copy(_persons, indexPersToDel + 1, afterDel, indexPersToDel, _persons.Length - 1 - indexPersToDel);
+            _persons = afterDel;
+            return persToDel;
         }
     }
 }
