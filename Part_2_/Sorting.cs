@@ -1,8 +1,9 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Part_2
 {
-    public static class Sorting
+    public static class Sorting 
     {
         /// <summary>
         /// Order.
@@ -14,9 +15,20 @@ namespace Part_2
         public static T[] Order<T>(T[] collection)
             where T : IComparable<T>, IComparable
         {
-            // NOTE: do not use LINQ
-            // TODO: implement here
-            throw new NotImplementedException();
+            T temp;
+            for (int i = 0; i < collection.Length - 1; i++)
+            {
+                for (int j = i + 1; j < collection.Length; j++)
+                {
+                    if (collection[i].CompareTo(collection[j])>0)
+                    {
+                        temp = collection[i];
+                        collection[i] = collection[j];
+                        collection[j] = temp;
+                    }
+                }
+            }
+            return collection;
         }
 
         /// <summary>
@@ -31,7 +43,20 @@ namespace Part_2
         {
             // NOTE: do not use LINQ
             // TODO: implement here
-            throw new NotImplementedException();
+            T temp;
+            for (int i = 0; i < collection.Length - 1; i++)
+            {
+                for (int j = i + 1; j < collection.Length; j++)
+                {
+                    if (collection[i].CompareTo(collection[j]) < 0)
+                    {
+                        temp = collection[i];
+                        collection[i] = collection[j];
+                        collection[j] = temp;
+                    }
+                }
+            }
+            return collection;
         }
 
         /// <summary>
@@ -45,7 +70,16 @@ namespace Part_2
         {
             // NOTE: do not use LINQ
             // TODO: implement here
-            throw new NotImplementedException();
+            T[] uniqueArr = new T[0];
+            foreach (T item in collection)
+            {
+                if (Array.IndexOf(uniqueArr,item)==-1)
+                {
+                    Array.Resize(ref uniqueArr, uniqueArr.Length + 1);
+                    uniqueArr.SetValue(item, uniqueArr.Length - 1);
+                }
+            }
+            return uniqueArr;
         }
     }
 }
